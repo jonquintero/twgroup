@@ -20,13 +20,8 @@
 
                 <!-- Búsqueda y botón para crear nueva reservación -->
                 <div class="row mb-4">
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Buscar reservaciones..." aria-label="Buscar" aria-describedby="button-addon2">
-                            <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
-                        </div>
-                    </div>
-                    <div class="col-md-8 text-end">
+
+                    <div class="col-md-12 text-end">
                         <a href="{{ route('reservations.create') }}" class="btn btn-dark">
                             <i class="bi bi-plus-lg me-1"></i>{{ __('Crear Reservación') }}
                         </a>

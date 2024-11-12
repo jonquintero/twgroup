@@ -28,7 +28,6 @@ class ReservationController extends Controller
         $rooms = Room::all();
         return view('reservation::create', compact('rooms'));
     }
-
     public function store(ReservationRequest $request)
     {
         $this->upsert($request, new Reservation());
@@ -36,7 +35,6 @@ class ReservationController extends Controller
         return redirect()->route('reservations.index')->with('success', 'Reserva creada con éxito.');
 
     }
-
     public function upsert(ReservationRequest $request, Reservation $reservation)
     {
         $reservationData = new ReservationData(...$request->validated());

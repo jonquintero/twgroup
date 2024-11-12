@@ -8,7 +8,7 @@ class UpdateReservationStatusRequest extends FormRequest
 {
     public function authorize()
     {
-        return true; // Cambia esto si quieres agregar lógica de autorización
+        return true; 
     }
 
     public function rules(): array

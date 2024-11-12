@@ -18,23 +18,22 @@ class ReservationRequest extends FormRequest
         return [
             'room_id' => [
                 'required',
-                'exists:rooms,id', // Verifica que la sala existe en la base de datos
+                'exists:rooms,id',
             ],
             'reservation_date' => [
                 'required',
                 'date',
-                'after:now', // Asegura que la fecha de reserva es futura
+                'after:now',
                 function ($attribute, $value, $fail) {
-                    // Define el rango de la reserva (inicio y fin de una hora)
-                    $startTime = Carbon::parse($value);
-                    $endTime = $startTime->copy()->addHour(); // Duración de una hora
 
-                    // Consulta para verificar si hay reservas en conflicto
+                    $startTime = Carbon::parse($value);
+                    $endTime = $startTime->copy()->addHour();
+
                     $conflictingReservation = Reservation::where('room_id', $this->room_id)
                         ->where(function ($query) use ($startTime, $endTime) {
                             $query->whereBetween('reservation_date', [$startTime, $endTime])
                                 ->orWhere(function ($query) use ($startTime, $endTime) {
-                                    // Ensure end time of existing reservations does not overlap
+
                                     $query->where('reservation_date', '<', $endTime)
                                         ->whereRaw('DATE_ADD(reservation_date, INTERVAL 1 HOUR) > ?', [$startTime]);
                                 });
