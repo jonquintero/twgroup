@@ -8,7 +8,6 @@ class DeleteRoomAction
 {
     public function execute(Room $room): bool
     {
-
         if ($room->reservations()->exists()) {
             return false;
         }
